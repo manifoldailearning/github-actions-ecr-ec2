@@ -1,12 +1,7 @@
-FROM python:3.10
-
-WORKDIR /app
-
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
-
+#!/bin/bash
+FROM --platform=linux/amd64 python:3.10
 COPY . .
-
-EXPOSE 8080
-
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+RUN pip install -r requirements.txt
+EXPOSE 80
+ENTRYPOINT [ "python" ]
+CMD [ "main.py" ]
